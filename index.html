@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <audio id="backgroundMusic" src="sound/bg_Music.mp3" loop></audio>
+
+    <div class="blue-red">
+        <div class="team" id="blueTeam">
+            <span class="editable-team">Blue Team</span>
+        </div>
+        <div class="team" id="redTeam">
+            <span class="editable-team">Red Team</span>
+        </div>
+    </div>
+
+    <div class="container-show-Score">
+        <div class="showScoreBlue">
+            <span id="Score-red">0</span>
+
+        </div>
+        <div class="showScoreRed">
+            <span id="Score-blue">0</span>
+        </div>
+    </div>
+
+
+
+    <div class="container-dot">
+        <div class="team-dots" id="blueDots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+
+        </div>
+        <div class="team-dots" id="redDots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <div class="container-score">
+        <div class="score-input" id="redScore">
+            <input class="score" type="number" value="0" min="0">
+            <input class="score" type="number" value="0" min="0" style="margin-left: 15px;margin-right: 15px;">
+            <input class="score" type="number" value="0" min="0">
+        </div>
+        <div class="score-input" id="blueScore">
+            <input class="score" type="number" value="0" min="0">
+            <input class="score" type="number" value="0" min="0" style="margin-left: 15px;margin-right: 15px;">
+            <input class=" score" type="number" value="0" min="0">
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="timer">
+            <svg class="progress-ring" height="480" width="480">
+                <circle class="progress-ring__circle" stroke-width="10" fill="transparent" r="200" cx="240" cy="240" />
+            </svg>
+            <div class="time-display">
+                <span class="editable" id="minutes">2</span>
+                <span class="separator">:</span>
+                <span class="editable" id="seconds">00</span>
+            </div>
+        </div>
+
+
+        <!-- Nút Set nhanh -->
+        <div class="quick-set">
+            <button class="set-time" id="set-10s" data-time="10">+0:10</button>
+            <button class="set-time" data-time="20">+0:20</button>
+            <button class="set-time" data-time="60">+1:00</button>
+            <button class="set-time" id="changeTimeBtn" data-time="160">160</button>
+        </div>
+
+        <div class="controls">
+            <button id="startPause">▶</button>
+            <button id="reset">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button id="add10s" style="display: none;">+10s</button>
+        </div>
+    </div>
+
+
+    <div class="small-timer" style="top: 160px; position: fixed; background-color: rgb(221, 237, 3);">
+        <span id="simple-timer" style=" color: #100d0dc9;font-size: 50px; font-weight: bold;">120</span>
+
+    </div>
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

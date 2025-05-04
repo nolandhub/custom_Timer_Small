@@ -1,0 +1,330 @@
+body {
+    background-color: #1E1F29;
+    color: #E0E0E0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+}
+
+.timer {
+    position: relative;
+    width: 480px;
+    height: 480px;
+    margin-top: 200px;
+}
+
+.time-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10rem;
+    font-weight: bold;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    /* Xoay vòng tròn để bắt đầu từ đỉnh */
+
+
+}
+
+.progress-ring__circle {
+    stroke-dasharray: 1256;
+    /* Chu vi: 2 * PI * r (2 * 3.14 * 90) */
+    stroke-dashoffset: 1256;
+    /* Ẩn toàn bộ nét vẽ */
+    transition: stroke-dashoffset 1s linear;
+}
+
+.separator {
+    font-size: 10rem;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/* Định dạng các nút Set nhanh */
+.quick-set {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.set-time {
+    background-color: #d0e0ff;
+    /* Màu nền xanh nhạt */
+    border: 1px solid #c0c0c0;
+    /* Viền nhẹ */
+    border-radius: 20px;
+    /* Bo góc tròn */
+    padding: 8px 16px;
+    /* Kích thước padding */
+    font-size: 16px;
+    /* Cỡ chữ */
+    font-weight: bold;
+    /* In đậm */
+    color: #333;
+    /* Màu chữ */
+    cursor: pointer;
+    /* Biểu tượng chuột */
+    transition: all 0.2s ease-in-out;
+    /* Hiệu ứng hover */
+}
+
+.set-time:hover {
+    background-color: #b0d0ff;
+    /* Đổi màu nền khi hover */
+    border-color: #909090;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    color: rgba(255, 246, 246, 0.874);
+    font-size: 24px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+#reset {
+    background-color: #0099FF;
+}
+
+#reset:hover {
+    background-color: #007ACC;
+}
+
+#startPause {
+    background-color: #dc1428;
+}
+
+/* Thanh màu trên cùng */
+.blue-red {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+
+}
+
+
+
+
+#blueTeam {
+    background-color: #1d85f4;
+}
+
+#redTeam {
+    background-color: #dc1428;
+}
+
+.team {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 50%;
+    height: 160px;
+
+}
+
+.editable-team {
+    outline: none;
+    /* Loại bỏ viền khi chỉnh sửa */
+    cursor: text;
+    /* Đổi con trỏ chuột khi hover vào */
+
+    display: inline-block;
+    /* Để phần tử co giãn theo nội dung */
+    min-width: 50px;
+    /* Đặt kích thước tối thiểu */
+    max-width: 100%;
+    /* Giới hạn chiều rộng */
+    font-size: 7rem;
+    /* Kích thước chữ mặc định */
+    text-align: center;
+    /* Căn giữa nội dung */
+
+
+}
+
+
+
+
+.container-dot {
+    top: 180px;
+    position: absolute;
+    display: flex;
+    z-index: 100;
+    gap: 750px;
+    padding: 10px 20px;
+}
+
+
+.dot {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(130, 130, 130);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.dot.active {
+    background-color: #FFFF00;
+
+}
+
+.team-dots {
+    display: flex;
+    gap: 40px;
+}
+
+
+
+.container-score {
+    top: 250px;
+    position: absolute;
+    display: flex;
+    z-index: 100;
+    gap: 718px;
+    padding: 10px 20px;
+}
+
+.score-input {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-score:hover .score-input {
+    visibility: visible;
+    /* Hiện khi hover */
+    opacity: 1;
+}
+
+.score {
+    width: 70px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 15%;
+    background-color: rgba(0, 255, 60, 0.942);
+    color: #ffff21;
+    cursor: pointer;
+
+
+
+
+}
+
+/* Ẩn mũi tên tăng/giảm trên trình duyệt Chrome, Edge, Safari */
+.score::-webkit-inner-spin-button,
+.score::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+/* Đổi màu khi focus */
+.score:focus {
+    outline: none;
+    background-color: rgb(233, 163, 72);
+}
+
+
+
+.container-show-Score {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    gap: 700px;
+    top: 350px;
+    height: 50px;
+
+
+}
+
+.showScoreBlue {
+    font-weight: bolder;
+    width: 300px;
+    height: 330px;
+    background-color: #007BFF;
+    /* Xanh dương đậm */
+    color: white;
+    border: 2px solid #FFFFFF;
+    /* Viền trắng để nổi bật */
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    align-items: center;
+    font-size: 280px;
+}
+
+.showScoreRed {
+    font-weight: bolder;
+    width: 300px;
+    height: 330px;
+    background-color: #DC3545;
+    /* Đỏ đậm */
+    color: white;
+    border: 2px solid #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 280px;
+}
+
+
+
+.quick-set {
+    display: none;
+    gap: 10px;
+
+}
