@@ -267,6 +267,29 @@ document.querySelectorAll('.set-time').forEach(button => {
     });
 });
 
+
+document.querySelectorAll('.team').forEach(teamDiv => {
+    const span = teamDiv.querySelector('.editable-team');
+    const select = teamDiv.querySelector('.team-select');
+
+    // Khi click vào tên đội
+    span.addEventListener('click', () => {
+        select.style.display = 'inline-block';
+        select.focus();
+    });
+
+    // Khi chọn đội trong danh sách
+    select.addEventListener('change', () => {
+        span.textContent = select.value;
+        select.style.display = 'none';
+    });
+
+    // Ẩn dropdown nếu mất focus
+    select.addEventListener('blur', () => {
+        select.style.display = 'none';
+    });
+});
+
 function setTimeDirectly(seconds) {
     countdownValue = seconds;  // Cập nhật giá trị countdownValue
     document.getElementById('minutes').textContent = Math.floor(countdownValue / 60);

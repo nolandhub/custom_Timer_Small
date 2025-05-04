@@ -12,12 +12,35 @@
 <body>
     <audio id="backgroundMusic" src="sound/bg_Music.mp3" loop></audio>
 
-    <div class="blue-red">
+    <!-- <div class="blue-red">
         <div class="team" id="blueTeam">
             <span class="editable-team">Blue Team</span>
         </div>
         <div class="team" id="redTeam">
             <span class="editable-team">Red Team</span>
+        </div>
+    </div> -->
+
+    <div class="blue-red">
+        <div class="team" id="blueTeam">
+            <span class="editable-team" onclick="editTeam(this, 'blue')">Blue Team</span>
+            <select class="team-select" style="display: none;" onchange="selectTeam(this, 'blue')">
+                <option value="LH-TKCB">LH-TKCB</option>
+                <option value="LH-AS">LH-AS</option>
+                <option value="LH-UDS">LH-UDS</option>
+                <option value="LH-WARRIOR">LH-WARRIOR</option>
+                <option value="LH-SWEEP">LH-SWEEP</option>
+            </select>
+        </div>
+        <div class="team" id="redTeam">
+            <span class="editable-team" onclick="editTeam(this, 'red')">Red Team</span>
+            <select class="team-select" style="display: none;" onchange="selectTeam(this, 'red')">
+                <option value="LH-TKCB">LH-TKCB</option>
+                <option value="LH-AS">LH-AS</option>
+                <option value="LH-UDS">LH-UDS</option>
+                <option value="LH-WARRIOR">LH-WARRIOR</option>
+                <option value="LH-SWEEP">LH-SWEEP</option>
+            </select>
         </div>
     </div>
 
