@@ -23,17 +23,18 @@ const quickSetContainer = document.querySelector(".quick-set");
 
 let countdownValue = 120; // số giây đếm ngược
 let countdownInterval = null;
+let remainingTime1 = countdownValue;
 
-let isSmallRun = true;
+
 
 function startCountdown() {
     // Ngăn người dùng nhấn nhiều lần
     if (countdownInterval !== null) return;
 
     countdownInterval = setInterval(() => {
-        if (countdownValue > 0) {
-            countdownValue--;
-            document.getElementById("simple-timer").textContent = countdownValue;
+        if (remainingTime1 > 0) {
+            remainingTime1--;
+            document.getElementById("simple-timer").textContent = remainingTime1;
         } else {
             clearInterval(countdownInterval);
             countdownInterval = null;
@@ -104,6 +105,40 @@ function updateDisplay() {
 
 
 
+function startPauseTimer_add() {
+    if (isRunning) {
+        startSound.pause();
+        clearInterval(timerInterval);
+        startPauseBtn.textContent = "▶"; // Hiển thị icon Play
+        add10sBtn.style.display = "inline-block"; // Hiện nút +10s khi tạm dừng
+    } else {
+        timerInterval = setInterval(() => {
+            if (remainingTime > 0) {
+                remainingTime--;
+                updateDisplay();
+
+                if (remainingTime === 12 && !disableSoundAt12) {
+                    dingDongSound.play();
+                }
+                if (remainingTime === 11 && disableSoundAt12) {
+                    disableSoundAt12 = false;
+                }
+
+                if (remainingTime <= 5) startSound.play();
+                if (remainingTime <= 0) startSound.pause();
+            } else {
+                clearInterval(timerInterval);
+                isRunning = false;
+                startPauseBtn.textContent = "▶";
+            }
+        }, 1000);
+        startPauseBtn.textContent = "⏸";
+        add10sBtn.style.display = "none"; // Ẩn nút +10s khi chạy
+    }
+    isRunning = !isRunning;
+}
+
+
 
 
 function startPauseTimer() {
@@ -152,15 +187,27 @@ function startPauseTimer() {
 // Reset timer
 function resetTimer() {
 
-    //stop Sound
+    ////fix bug
+    // stop sound
     startSound.pause();
-    //reset default 0s
     startSound.currentTime = 0;
 
+    // dừng 2 timer
     clearInterval(timerInterval);
+    clearInterval(countdownInterval);
+    countdownInterval = null;
+
     isRunning = false;
+
+    // reset chính
     remainingTime = totalTime;
     updateDisplay();
+
+    // reset phụ (small timer)
+    countdownValue = remainingTime1; /* pro player */
+
+
+    // UI
     startPauseBtn.textContent = "▶";
 
 
@@ -249,6 +296,14 @@ document.querySelectorAll('.dot').forEach(dot => {
 });
 
 
+document.addEventListener("keydown", function (e) {
+    if (e.key.toLowerCase() === "h") {
+        startPauseTimer_add();
+        quickSetContainer.style.display = "none";
+    }
+});
+
+
 
 
 
@@ -260,6 +315,7 @@ document.querySelectorAll('.set-time').forEach(button => {
             // Chỉ cập nhật small timer khi nút "160" được nhấn
             document.getElementById('simple-timer').textContent = time;
             countdownValue = time;
+            remainingTime1 = time;
         } else {
             // Nếu không phải nút "160", thì xử lý logic khác nếu cần
             setTimeDirectly(time);  // Gọi hàm setTimeDirectly nếu cần cho timer chính
